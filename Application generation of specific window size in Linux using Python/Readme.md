@@ -71,7 +71,8 @@ i) No parameters passed:
 ``` python align.py -w -h ```
 	
 Takes the current system's screen resoultion, and then auto aligns 20 windows
-![Image 1] (https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/1.PNG)
+
+![Image 1](https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/1.PNG)
 
 	
 ii) Only Width and height(in pixels) passed
@@ -79,39 +80,40 @@ ii) Only Width and height(in pixels) passed
 ```python align.py -w 100 -h 100```
 	
 Will create 20 command prompt windows(default values) based on the given width = 100 and height = 100
-![Image] (https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/2.PNG)
+![Image](https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/2.PNG)
 
 iii) Input passed is out of bounds
 
 ``` python align.py -w 100 -h 200```
 
 If suppose screen resoulution is out of bounds for creating 20 windows based on given inputs, then give error and exit!
-![Image] (https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/3.PNG)
+
+![Image](https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/3.PNG)
     
 iv) Get help regarding the application
 
 ```python align.py -d```
     
 Help mode On. Provides details on how to use the program
-![Image] (https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/4.PNG)
+![Image](https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/4.PNG)
 
 v) Only number of rows and columns passed
 
 ```python align.py -r 3 -c 4```
 
 Creates a total of 12 new terminals, using the current device's screen resolution
-![Image] (https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/5.PNG)
+![Image](https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/5.PNG)
 
 vi) Number of rows, columns, and height, width is passed
 
 ``` python align.py -w 100 -h 200 -r 3 -c 4```
 
 Creates a total of 12(3 * 4) new terminals, of each of 100 * 200 pixels dimensions
-![Image] (https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/6.PNG)
+![Image](https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/6.PNG)
 
 vii) When all parameters are passed
 
 ``` python align.py -w 100 -h 200 -r 1 -c 2 -a gedit```
 
 Creates a total of 2 new Gedit process window of dimension = 100 * 200 px	
-![Image] (https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/7.PNG)
+![Image](https://github.com/jaytorasakar8/Personal-Projects/blob/master/Application%20generation%20of%20specific%20window%20size%20in%20Linux%20using%20Python/Output%20Screenshots/7.PNG)
