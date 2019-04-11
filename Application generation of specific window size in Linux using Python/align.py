@@ -3,7 +3,7 @@
 import sys, getopt
 import gtk, pygtk
 import os
-
+import commands
 
 screen_width = 0
 screen_height = 0
@@ -80,9 +80,9 @@ def main(argv):
       input_rows = int(5)
       input_columns = int(4)
    
-   if (input_rows is None):
+   if (input_rows is None or input_rows == 0):
       input_rows = int(5)
-   if (input_columns is None):
+   if (input_columns is None or input_columns == 0):
       input_columns = int(4)
  
    #It could be a string or an integer, so converting it to int	
@@ -103,11 +103,14 @@ def main(argv):
    input_width = int(input_width)
    input_height = int(input_height)
    
+   #input width or height is not provided, so taking default values
+   if (input_width is None) or  (input_width == 0):
+	  print 'Input width not provided. Taking default values based on screen resolution'
+ 	  input_width = screen_width/input_columns
 
-   if (input_width is None) or  (input_height is None):
-	  print 'Input screen width and height not provided. Taking default values based on screen resolution'
- 	  input_width = screen_width/4
-	  input_height = screen_height/5
+   if (input_height is None) or (input_height == 0):
+	  print 'Input height not provided. Taking defalut value based on screen resolution'
+	  input_height = screen_height/input_rows
 
    #If application hasn't been given, so by default creating a terminal
    if application == '':
@@ -140,16 +143,25 @@ def main(argv):
 
    for i in range(input_rows):
        for j in range(input_columns):
-           finalx = startx + input_width #Need to update here based on X_percent, Y_percent
+           finalx = startx + input_width
            finaly = starty + input_height
            generate(startx,starty)
            startx = finalx
-       
+           #finalx = startx + ((partition_x_percent * screen_width)/100)
+           #finaly = starty + ((partition_y_percent * screen_height)/100)
+
        startx = 0
        starty = starty + input_height
+       #starty = starty + ((partition_y_percent * screen_height)/100)
    finalcmd =  finalcmd[0:len(finalcmd)-3]
    print finalcmd
-   #os.system(finalcmd)
+   
+   try:
+       os.system(finalcmd)
+   except:
+       print "Something went wrong with the given input application name. Please provide correct parameters!"
+       sys.exit(2)	
+	
 
 
 def generate(startx,starty):

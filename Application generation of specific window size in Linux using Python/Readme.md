@@ -1,3 +1,25 @@
+###Description
+
+The main aim of the project to create a number of subprocesses, based on the given input parameters by the user. 
+
+Suppose you wish to create 6 new terminals of a particular size and of specific window size, you can do it using my application
+The command line argument is: 
+
+```
+python align.py -d [help_mode] -w [width] -h [height] -r [no of rows] -c [no of columns] -a [application name]
+```
+   OR
+```
+python align.py --debug [help_mode] --width [width] --height [height] --rows [no of rows] --columns [no of columns] --application [application name]
+```
+
+1. All the arguments mentioned above are optional arguments. You may or may not pass the arguments
+
+2. You can provide any combination of number of rows, columns and width and height(in pixels) and application named to be spawned. 
+
+3. The result is n(=rows*columns) number of new applications are spawned up based on given input
+
+###Installation Steps 
 1. Install Python
 ```	
 	sudo apt-get update
@@ -38,17 +60,50 @@ Assuming we are going to copy the file on Desktop
 
 8. How to run: 
 ```	
-	python [script_file_name] -w [desired_width] -h [desired_height]
-	                           OR
-	python [script_file_name] --width [desired_width] --height [desired_height]
+	python [script_file_name] -d [help_mode] -w [width] -h [height] -r [no of rows] -c [no of columns] -a [application name]
+                           OR
+	python [script_file_name] --debug [help_mode] --width [width] --height [height] --rows [no of rows] --columns [no of columns] --application [application name]
 ```
 
-9. Inputs allowed:
-	i) ``` python align.py -w -h ```
-		Takes the current system's screen resoultion, and then auto aligns 20 windows
-	ii) ```python align.py -w 100 -h 100```
-	     Will create 20 command prompt windows based on the input parameters of width = 100 and height = 100
-    iii)``` python align.py -w 100 -h 200```
-    	  If suppose screen resoulution is out of bounds for creating 20 windows based on given inputs, then give error and exit!
-    iv) ```python align.py -d```
-    	   Help mode On. Provides details on how to use the function
+#### Test Cases
+i) No parameters passed: 
+    
+``` python align.py -w -h ```
+	
+Takes the current system's screen resoultion, and then auto aligns 20 windows
+	
+ii) Only Width and height(in pixels) passed
+
+```python align.py -w 100 -h 100```
+	
+Will create 20 command prompt windows(default values) based on the given width = 100 and height = 100
+    
+iii) Input passed is out of bounds
+
+``` python align.py -w 100 -h 200```
+
+If suppose screen resoulution is out of bounds for creating 20 windows based on given inputs, then give error and exit!
+    
+iv) Get help regarding the application
+
+```python align.py -d```
+    
+Help mode On. Provides details on how to use the program
+
+v) Only number of rows and columns passed
+
+```python align.py -r 3 -c 4```
+
+Creates a total of 12 new terminals, using the current device's screen resolution
+
+vi) Number of rows, columns, and height, width is passed
+
+``` python align.py -w 100 -h 200 -r 3 -c 4```
+
+Creates a total of 12(3 * 4) new terminals, of each of 100 * 200 pixels dimensions
+
+vii) When all parameters are passed
+
+``` python align.py -w 100 -h 200 -r 1 -c 1 -a gedit```
+
+Creates a total of 1 new Gedit process window of dimension = 100 * 200 px	
