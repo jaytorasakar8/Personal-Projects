@@ -1,4 +1,4 @@
-###Description
+### Description
 
 The main aim of the project to create a number of subprocesses, based on the given input parameters by the user. 
 
@@ -19,7 +19,7 @@ python align.py --debug [help_mode] --width [width] --height [height] --rows [no
 
 3. The result is n(=rows*columns) number of new applications are spawned up based on given input
 
-###Installation Steps 
+### Installation Steps 
 1. Install Python
 ```	
 	sudo apt-get update
