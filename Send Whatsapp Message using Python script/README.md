@@ -7,18 +7,18 @@ You just have to provide the Contact's name, message text and how many times do 
 #### Prerequisites
 
 1.  The code I have written is in Python 3, so check if you have Python 3 or not with the help of: 
-```
-python -V
-``` 
+    ```
+     python -V
+    ``` 
   
 Incase you don't have python, you can download it from here: https://www.python.org/downloads/
  
  
 2. Python Bindings for Selenium ( Browser Automation software )
 
-```
-pip install selenium
-```
+    ```
+     pip install selenium
+    ```
 
 3. Download Chrome Driver
 
