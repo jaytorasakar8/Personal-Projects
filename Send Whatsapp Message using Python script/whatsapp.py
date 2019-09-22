@@ -16,6 +16,8 @@ driver.get("https://web.whatsapp.com/")
 # If there is no response for 600 secs, the operation times out and we throw an exception
 wait = WebDriverWait(driver, 600)
 
+print("Sending message using Whatsapp Web...")
+
 # Person or Group name whom you wish to send the whatsapp messsage
 target = input('Enter the name of user or group : ')
 
@@ -24,6 +26,13 @@ string = input('Enter your message : ')
 
 # Number of times you want to send the message
 count = int(input('Enter the count : '))
+
+# Adding emojis at the end of the text message
+answer = input("Do you wish to add Emoji at the end of your message[Y/N]: ")
+if answer == "Y":
+    print("List of Emoji names supported are:")
+    print("Winking, Smile")
+    emoji_name = input('Enter the Emoji name from the above list: ').lower()
 
 # This ensures that we are not executing any further steps until the Whatsapp QR code is scanned and login is successful
 # If we don't scan QR code, and continue to execute the next statements, they will give an exception
@@ -41,9 +50,15 @@ print("Message box of user selected")
 
 # Send n number of messages to the user
 for i in range(count):
-    msg_box.send_keys(string)
+    if answer == "Y":
+        msg_box.send_keys(string, " :",emoji_name, Keys.ENTER)
+        driver.find_element_by_class_name("_13mgZ").send_keys(Keys.ENTER)
+    else:
+        msg_box.send_keys(string)
+
     # The button element's class may be updated in the future, similar to the message box mentioned above
     button = driver.find_element_by_class_name('_3M-N-')
     button.click()
-    print("Messsage sent to user successfully")
+
+print("Your message for ", target, "has been sent successfully")
 
