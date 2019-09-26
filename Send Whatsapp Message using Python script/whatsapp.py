@@ -6,6 +6,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common import action_chains, keys
 import time
 from datetime import datetime
+from Emojis import *
+
+class Bcolors:
+    BLUE  = '\033[94m'
+    RESET = '\033[0m'
 
 # Path for the chromedriver.exe file
 # I am running the script on Windows, hence my path string contains backslash
@@ -30,9 +35,10 @@ count = int(input('Enter the count : '))
 # Adding emojis at the end of the text message
 answer = input("Do you wish to add Emoji at the end of your message[Y/N]: ")
 if answer == "Y":
+    list_emojis = list(emoji_map.keys())
     print("List of Emoji names supported are:")
-    print("Winking, Smile")
-    emoji_name = input('Enter the Emoji name from the above list: ').lower()
+    print(Bcolors.BLUE, list_emojis, Bcolors.RESET)
+    emoji_short_name = input('Enter the Emoji name from the above list: ').lower()
 
 # This ensures that we are not executing any further steps until the Whatsapp QR code is scanned and login is successful
 # If we don't scan QR code, and continue to execute the next statements, they will give an exception
@@ -51,7 +57,7 @@ print("Message box of user selected")
 # Send n number of messages to the user
 for i in range(count):
     if answer == "Y":
-        msg_box.send_keys(string, " :",emoji_name, Keys.ENTER)
+        msg_box.send_keys(string, " :", str(emoji_map[emoji_short_name]), Keys.ENTER)
         driver.find_element_by_class_name("_13mgZ").send_keys(Keys.ENTER)
     else:
         msg_box.send_keys(string)

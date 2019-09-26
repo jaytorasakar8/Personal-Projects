@@ -37,3 +37,15 @@ If you don't have Google Chrome you can download it from [here](https://www.goog
 
 You can also use Chromium Browser(open source version of Chrome Browser)
    
+
+Limitations: 
+1. One of the limitation is that the user target chat must be within the 17 chat list, then only the script will be able to send the message to the target user.
+
+
+Emoji Support: 
+
+| Emoji Short Name | Emoji   | Emoji Actual Name                           |
+|------------------|-------  |---------------------------------------------|
+| smile   | :simple_smile:     | Slightly Smiling Face  |
+| wink   | :wink:     | Winking Face  |
+
