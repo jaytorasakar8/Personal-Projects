@@ -29,8 +29,10 @@ def scripting():
      deaths = divTag[1].find('span').text.strip()
      recovered = divTag[2].find('span').text.strip()
 
-     #Location of the file where we want to store our data
-     myFile = open('/home/hadoop/covid/data.csv','a') 
+     #Location of the file where we want to store the data
+     #NOTE: Update the data file location based on your local machine path
+     myFile = open('/home/hadoop/CoronaVirusDataScrapper/data.csv','a') 
+     
      #We are appending the data of number of cases, deaths and recovered worldwide
      #We are using ~ as the delimitier, since we are already having a comma in the number stats
      myFile.write('\n' + str(datetime.now()) + '~' + cases + '~' + deaths + '~' + recovered )
