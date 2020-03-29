@@ -6,7 +6,32 @@ I just created this project to see if I can use this data for predictive modelin
 Currently I am collecting the data at an interval of every **10 minutes**. 
 I am scrapping the data from [COVID-19 CORONAVIRUS PANDEMIC](https://www.worldometers.info/coronavirus/ "CoronaVirus Live Update")
 
-I have written the script in Python 3 and it contains a scheduler which scraps data every 10 minutes and stores data into a csv file! 
+I have written the script in Python 3 and you can scrap the data every 10 minutes using either the schedular approach or using a cron job, and then store the latest data into a csv file! 
+
+
+#### How to run the script
+1. By using the Python Scheduler:
+The python scheduling code is in ```script.py```
+```
+jay@jay-remote-machine:~/CoronaVirusDataScrapper$ python script.py
+```
+The only change that you need to make in this script is the path to the store the data.
+The disadvantage of using a Scheduler is that you need to always keep the terminal open, and also it's even more difficult if you are connected to a remote machine. 
+
+2. By using a Cron Job:
+For running the Cron job, we have two files. The ```scheduleCron.py``` and ```script_for_cron.py```. 
+* In ```script_for_cron.py```, change the path where you wish to the store the data. 
+* In ```scheduleCron.py```, update the path of the script for cron job, based on your local directory path. 
+Then run the cron job scheduler using: 
+```
+jay@jay-remote-machine:~/CoronaVirusDataScrapper$ python scheduleCron.py 
+```
+
+* How to check if Cron Job is running (on Linux machine):
+```
+$crontab -l
+* * * * * python /home/hadoop/CoronaVirusDataScrapper/script_for_cron.py
+```
 
 #### Output
 1. On Terminal (on Linux)
