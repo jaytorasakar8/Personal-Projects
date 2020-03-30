@@ -29,8 +29,17 @@ jay@jay-remote-machine:~/CoronaVirusDataScrapper$ python scheduleCron.py
 
 * How to check if Cron Job is running (on Linux machine):
 ```
-$crontab -l
+$ crontab -l
 * * * * * python /home/hadoop/CoronaVirusDataScrapper/script_for_cron.py
+```
+
+3. If you want to run the python script in the background, then use: 
+```
+$ python scheduleCron.py &
+```
+Also if you want to run the python script and want to logout from the session/terminal(if you have script running on remote machine), you can use nohup(No Hangup signal) as follows(redirecting any errors to the log file): 
+```
+$ nohup python scheduleCron.py > output.log &
 ```
 
 #### Output
