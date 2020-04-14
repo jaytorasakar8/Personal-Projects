@@ -29,7 +29,6 @@ def main():
     web_byte = urlopen(req).read()
     html = web_byte.decode('utf-8')
 
-
     #Parsing the html content and using lxml’s HTML parser
     soup = BeautifulSoup(html, 'lxml')
     #Getting a list of all countries who have coronavirus cases 
@@ -39,7 +38,12 @@ def main():
     #Dictonary contains key:value pair of Country Name and it's corresponding URL
     for row in table.findAll("a"):
         dict[row.text.lower().capitalize()] = row['href']
-
+    
+    #Dumping the lastest list of countries affected by coronavirus into a JSON file, so that it can be used by our CronJob file.
+    with open("shared.json", "w+") as f:
+        json.dump(dict,f)
+     
+    #Get name of country from user
     country_name = input("Enter the name of Country to get the stats for Coronavirus: ").lower().capitalize()
 
     #If the user entered country is in our list then we continue, otherwise we give all the list of country names we support
