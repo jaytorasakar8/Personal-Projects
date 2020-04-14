@@ -11,21 +11,31 @@ import os
 import json
 import getopt, sys 
 
+class bcolors:
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
+#Loading the latest list of countries affected from coronavirus
 with open("/home/hadoop/covid/shared.json") as f:
     dict = json.load(f)
 
 country_name = ''
 
+#If no argument is passed, exit the program
+#Our program needs atleast 1 argument to be passed
 if len(sys.argv) <= 1:
-    print ("Error: Please enter the correct argument")
-    print ("If you want help please pass -h or --help as argument")
-    print ("if you want to schedule a cron job, pass -c or --country and the name of the country")
+    print (bcolors.FAIL+"[ERROR]: Incorrect arguments passed. Please enter the correct arguments", bcolors.ENDC)
+    print (bcolors.WARNING+"[INFO]: If you want help please pass -h or --help as argument")
+    print ("[INFO]: If you want to schedule a cron job, pass -c or --country and the name of the country", bcolors.ENDC)
     exit()
 
 argumentList = sys.argv[1:] 
   
-# Options 
+# Short options of 'help' and 'country' 
 options = "hc:"
   
 # Long options 
@@ -36,20 +46,24 @@ try:
     arguments, values = getopt.getopt(argumentList, options, long_options) 
     
     # checking each argument 
-    for currentArgument, currentValue in arguments: 
-        if currentArgument in ("-c", "--country"): 
-            country_name = currentValue.lower().capitalize()
-        elif currentArgument in ("-h", "--help"): 
-            print ("Diplaying Help")
+    for argument, value in arguments: 
+        if argument in ("-c", "--country"): 
+            country_name = value.lower().capitalize()
+        elif argument in ("-h", "--help"): 
+            print ("The script will get the current number Coronavirus cases, number of deaths and number of recovered for a user specified country.")
+            print ("User can pass the argument '-c <Country Name>' or '--country <Country Name>'")
+            print ("Sample program run: ", bcolors.BOLD, "\n\tpython script_specific_country.py -c India \n\tpython script_specific_country.py --country India", bcolors.ENDC)
             exit() 
     
 except getopt.error as err: 
     # output error, and return with an error code 
-    print ("Error in arguments. Error message detail: ", str(err))
-    exit()    
+    print (bcolors.FAIL+"[ERROR]: Error in arguments. Error message detail: ", str(err), bcolors.ENDC)
+    exit()  
+
+
 if country_name not in dict:
-    print("Please select the name of the country from this list only")
-    print(list(dict.keys()))
+    print(bcolors.FAIL+"[ERROR]: Wrong Country name selected. Please select the name of the country from this list only")
+    print(bcolors.BOLD, list(dict.keys()), bcolors.ENDC)
     exit()
 
 #URL to get the Latest Numbers on Coronavirus
@@ -78,14 +92,12 @@ cases = divTag[0].find('span').text.strip()
 deaths = divTag[1].find('span').text.strip()
 recovered = divTag[2].find('span').text.strip()
 
+#Creating a custom file to store data based on the country name
 file_name = "data_" + country_name + ".csv"
+#Change the directory path as per your current system
 file_path = os.path.join("/home/hadoop/covid/country_data/", file_name)
 
-# if os.path.exists(file_path):
-#     print("File already exists at that path, so appending the data points")
-# else:
-#     print("File doesn't exist, so creating a new file.....")
-
+#Open the file if it's already present, otherwise create a new file for data points storing
 myFileHandler = open(file_path,'a')
 #We are appending the data of number of cases, deaths and recovered worldwide
 #We are using ~ as the delimitier, since we are already having a comma in the number stats
