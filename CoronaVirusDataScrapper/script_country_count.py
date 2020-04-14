@@ -32,15 +32,17 @@ def main():
 
     #Parsing the html content and using lxml’s HTML parser
     soup = BeautifulSoup(html, 'lxml')
-
+    #Getting a list of all countries who have coronavirus cases 
     table = soup.find("table", {'id' : 'main_table_countries_today'})
     dict = {}
 
+    #Dictonary contains key:value pair of Country Name and it's corresponding URL
     for row in table.findAll("a"):
         dict[row.text.lower().capitalize()] = row['href']
 
     country_name = input("Enter the name of Country to get the stats for Coronavirus: ").lower().capitalize()
 
+    #If the user entered country is in our list then we continue, otherwise we give all the list of country names we support
     if country_name in dict:
         print("Country found in Coronavirus list")
         print(country_name)
@@ -49,6 +51,7 @@ def main():
         print(list(dict.keys()))
         exit()
 
+    #Each country has got it's own URL. Getting the country specific URL 
     country_url = url + dict[country_name]
 
     #We need to provide headers, otherwise we might get a 403: Forbidden error
@@ -71,13 +74,15 @@ def main():
     deaths = divTag[1].find('span').text.strip()
     recovered = divTag[2].find('span').text.strip()
 
+    #Print the current data stats for user entered country
     print("Time:", datetime.now(), bcolors.OKGREEN,"\nCurrent Coronavirus stats for", country_name.upper(), "are: ")
 
     print("Number of Cases:", cases, " Number of deaths:", deaths, " Number of recovered:", recovered, bcolors.ENDC)
 
-
+    #Check if the user is interested to schedule a Cron Job for data collection of that country
     flag = input("Do you wish to schedule a cron job : [Y/N] ")
-
+    
+    #User may enter N or n, then exit
     if flag == 'N' or flag == 'n':
         print("Exiting")
         exit()
@@ -86,8 +91,10 @@ def main():
     
     #Cron Job 
     cron = CronTab(user=True)
+
     #Command to run the cron job for user specified country
-    command_cron = '/home/sopatnai/anaconda3/bin/python /home/hadoop/covid/script_specific_country.py -c ' + country_name
+    #There is another script "script_specific_country", which is used to schedule cron job based on country name
+    command_cron = 'python /home/hadoop/covid/script_specific_country.py -c ' + country_name
     #Prefered to give the full path of the script file to be run
     job = cron.new(command=command_cron)
     #Run the script every 30 minutes
